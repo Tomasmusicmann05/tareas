@@ -1,47 +1,37 @@
-import { useState, useEffect } from 'react';
 import Form from './components/Form';
-import Tasks from './components/Tasks';
+import List from './components/List';
+import { useState } from 'react'
 
-function App() {
-  const [tasks, setTasks] = useState([]);
-  useEffect(() => {
-      const someTasks = [
-          {
-              _id: 1,
-              title: 'Sacar al perro',
-              done: false
-          },
-          {
-              _id: 2,
-              title: 'Jugar a la play',
-              done: true
-          },
-          {
-              _id: 3,
-              title: 'Aprender React',
-              done: false
-          }
-      ]
+const data=[
+{
+  _id:1,
+  text:'algo',
+  done:false},
+  {
+    _id:2,
+    text:'algo',
+    done:false}
+  ,{
+    _id:3,
+    text:'algo',
+    done:false}
 
-      setTasks(someTasks);
-  }, []);
+];
 
-  // helpers
-  const addTask = (newTask) => {
-    setTasks(prevTasks => prevTasks.concat(newTask))
-  }
 
-  const deleteTask = (id) => {
-    setTasks(tasks.filter(task => task._id !== id));
-  }
-
+const App = () => {
+  const [tasks, setTasks] = useState(data);
+  // render
+  const addTask = task =>{
+    setTasks([...tasks,task]);
+  };
   return (
-    <div className="App">
-      <h1>Todo list</h1>
-      <Form addTask={addTask} />
-      <Tasks tasks={tasks} deleteTask={deleteTask} />
+    <div className="container">
+      <h1>Lista de tareas</h1>
+      <Form addTask={addTask}/>
+      <List tasks={tasks} />
     </div>
   );
-}
+};
 
 export default App;
